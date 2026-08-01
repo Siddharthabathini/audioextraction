@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AudioRip — Conversion Complete</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <div class="container">
+    <div class="card success-card">
+
+      <div class="glow-bar glow-bar--green"></div>
+
+      <div class="success-icon">✅</div>
+      <h1 class="success-title">Conversion Complete!</h1>
+      <p class="success-sub">Your audio is ready to download below.</p>
+
+      <div class="waveform" aria-hidden="true">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </div>
+
+      <div class="file-row">
+        <div class="file-icon">🎧</div>
+        <div class="file-info">
+          <p class="file-name">output_audio</p>
+          <p class="file-meta">Extraction successful · Ready to download</p>
+        </div>
+        <span class="badge-ready">Ready</span>
+      </div>
+
+      <a href="{{ file_url }}" class="btn-dl">
+        ⬇ &nbsp;Download Audio
+      </a>
+
+      <a href="/" class="btn-again">
+        ↩ &nbsp;Convert Another File
+      </a>
+
+      <div class="info-chips" style="margin-top:20px;">
+        <span class="chip">🔒 Link expires in 1 hr</span>
+        <span class="chip">🆓 No sign-up required</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

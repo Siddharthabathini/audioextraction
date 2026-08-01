@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioRip - Video to Audio Converter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="bg-orbs">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="glow-bar"></div>
+
+            <div class="logo-row">
+                <div class="logo-icon">🎵</div>
+                <span class="brand">AudioRip</span>
+            </div>
+
+            <p class="subtitle">
+                Extract crystal-clear audio from any video file.
+                Fast, secure and easy to use.
+            </p>
+
+            <form action="/convert"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+                <p class="section-label">Upload Video</p>
+
+                <label class="upload-zone" id="dropZone">
+
+                    <input type="file"
+                           id="fileInput"
+                           name="video"
+                           accept="video/*"
+                           hidden
+                           required>
+
+                    <div class="upload-icon">📁</div>
+
+                    <p class="upload-main" id="uploadMain">
+                        Drag & Drop or Click to Select
+                    </p>
+
+                    <p class="upload-sub">
+                        MP4, AVI, MKV, MOV
+                    </p>
+
+                    <p class="file-chosen"
+                       id="fileChosen"></p>
+
+                </label>
+
+                <p class="section-label">
+                    Output Format
+                </p>
+
+                <div class="format-row">
+
+                    <label class="fmt-card selected">
+
+                        <input type="radio"
+                               name="format"
+                               value="mp3"
+                               checked
+                               hidden>
+
+                        <span class="dot"></span>
+
+                        <span class="fmt-title">
+                            MP3
+                        </span>
+
+                        <span class="fmt-desc">
+                            Universal format
+                        </span>
+
+                    </label>
+
+                    <label class="fmt-card">
+
+                        <input type="radio"
+                               name="format"
+                               value="wav"
+                               hidden>
+
+                        <span class="dot"></span>
+
+                        <span class="fmt-title">
+                            WAV
+                        </span>
+
+                        <span class="fmt-desc">
+                            Lossless quality
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <p class="section-label">
+                    Audio Quality
+                </p>
+
+                <div class="quality-row">
+
+                    <label class="q-chip">
+                        <input type="radio"
+                               name="bitrate"
+                               value="128"
+                               hidden>
+                        128 kbps
+                    </label>
+
+                    <label class="q-chip active">
+                        <input type="radio"
+                               name="bitrate"
+                               value="192"
+                               checked
+                               hidden>
+                        192 kbps
+                    </label>
+
+                    <label class="q-chip">
+                        <input type="radio"
+                               name="bitrate"
+                               value="320"
+                               hidden>
+                        320 kbps
+                    </label>
+
+                </div>
+
+                <button type="submit"
+                        class="btn-main">
+                    ⚡ Convert to Audio
+                </button>
+
+            </form>
+
+            <div class="info-chips">
+
+                <span class="chip">
+                    🔒 Secure Upload
+                </span>
+
+                <span class="chip">
+                    🎧 High Quality
+                </span>
+
+                <span class="chip">
+                    ⚡ Fast Conversion
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+
+document.querySelectorAll('.fmt-card').forEach(card => {
+    card.addEventListener('click', () => {
+
+        document.querySelectorAll('.fmt-card')
+        .forEach(c => c.classList.remove('selected'));
+
+        card.classList.add('selected');
+    });
+});
+
+document.querySelectorAll('.q-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+
+        document.querySelectorAll('.q-chip')
+        .forEach(c => c.classList.remove('active'));
+
+        chip.classList.add('active');
+    });
+});
+
+const fileInput =
+document.getElementById('fileInput');
+
+const uploadMain =
+document.getElementById('uploadMain');
+
+const fileChosen =
+document.getElementById('fileChosen');
+
+const dropZone =
+document.getElementById('dropZone');
+
+fileInput.addEventListener('change', () => {
+
+    if(fileInput.files.length){
+
+        const file =
+        fileInput.files[0];
+
+        uploadMain.textContent =
+        "✔ File Selected";
+
+        fileChosen.textContent =
+        file.name;
+
+        dropZone.classList.add('has-file');
+    }
+});
+
+dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+});
+
+dropZone.addEventListener('drop', e => {
+
+    e.preventDefault();
+
+    dropZone.classList.remove('dragover');
+
+    if(e.dataTransfer.files.length){
+
+        fileInput.files =
+        e.dataTransfer.files;
+
+        fileInput.dispatchEvent(
+            new Event('change')
+        );
+    }
+});
+
+</script>
+
+</body>
+</html>
